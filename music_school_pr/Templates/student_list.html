@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список учащихся</title>
+</head>
+<body>
+    <a href="{% url 'student_new' %}">Добавить нового учащегося</a>
+    <table border="1">
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Курс</th>
+            <th>Инструмент</th>
+            <th>Успеваемость</th>
+            <th>Оплата</th>
+            <th>Действия</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.first_name }}</td>
+            <td>{{ student.last_name }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.course }}</td>
+            <td>{{ student.get_instrument_display }}</td>
+            <td>{{ student.average_score }}</td>
+            <td>{{ student.has_paid|yesno:"Оплатил,Не оплатил" }}</td>
+            <td>
+                <a href="{% url 'student_edit' student.pk %}">Редактировать</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
